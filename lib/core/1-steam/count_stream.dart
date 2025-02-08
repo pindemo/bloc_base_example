@@ -1,4 +1,4 @@
-import 'package:base/console.dart';
+import 'package:base/util/console.dart';
 
 void fn() async {
   // 将函数标记为 async* ，可以使用 yield 关键字并返回 Stream 数据。

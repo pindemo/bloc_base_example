@@ -1,4 +1,4 @@
-import 'package:base/console.dart';
+import 'package:base/util/console.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// SimpleBlocObserver 用于全局监听所有 Bloc 的事件、状态变化和错误

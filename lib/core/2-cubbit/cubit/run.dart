@@ -1,4 +1,4 @@
-import 'package:base/console.dart';
+import 'package:base/util/console.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'counter_cubit.dart';

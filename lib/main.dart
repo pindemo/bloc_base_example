@@ -1,6 +1,9 @@
+import 'package:base/util/code_reader.dart';
+import 'package:base/util/show_code.dart';
 import 'package:dynamic_tabbar/dynamic_tabbar.dart';
 import 'package:flutter/material.dart';
 
+import 'util/card_widget.dart';
 import 'widget/0-bloc_builder/bloc_builder.dart' as bloc_builder;
 import 'widget/0-bloc_builder/bloc_builder2.dart' as bloc_builder2;
 import 'widget/1-bloc_selector/bloc_selector.dart';
@@ -19,7 +22,14 @@ import 'widget/9-context_read/context_read.dart';
 import 'widget/9-context_select/context_select.dart';
 import 'widget/9-context_watch/context_watch.dart';
 
-void main() {
+void main() async {
+  // 在调用任何其他异步操作之前初始化 Flutter binding
+  // 确保 Flutter 服务和插件正确初始化
+  // 防止 "Binding has not yet been initialized" 错误
+  // 这是一个常见的修复方法，特别是当应用程序在 main() 函数中需要执行异步操作时。
+  WidgetsFlutterBinding.ensureInitialized();
+  await showCodeInit();
+
   runApp(const MyApp());
 }
 
@@ -57,11 +67,41 @@ class _DynamicTabExampleState extends State<DynamicTabExample> {
           children: [
             CardWidget(
               title: '省略 bloc 参数',
-              child: bloc_builder.BlocBuilderWidget(),
+              footerBuilder: () {
+                return FutureBuilder<String>(
+                  future: CodeReader.getDartCode(
+                    r'lib\widget\0-bloc_builder\code_show.dart',
+                  ),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return getShowCode(
+                        code: snapshot.data ?? '',
+                      );
+                    }
+                    return const CircularProgressIndicator();
+                  },
+                );
+              },
+              body: bloc_builder.BlocBuilderWidget(),
             ),
             CardWidget(
               title: '添加 bloc 参数',
-              child: bloc_builder2.BlocBuilderWidget(),
+              body: bloc_builder2.BlocBuilderWidget(),
+              footerBuilder: () {
+                return FutureBuilder<String>(
+                  future: CodeReader.getDartCode(
+                    r'lib\widget\0-bloc_builder\code_show.dart',
+                  ),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return getShowCode(
+                        code: snapshot.data ?? '',
+                      );
+                    }
+                    return const CircularProgressIndicator();
+                  },
+                );
+              },
             ),
           ],
         ),
@@ -76,7 +116,22 @@ class _DynamicTabExampleState extends State<DynamicTabExample> {
           children: [
             CardWidget(
               title: 'BlocSelector 示例',
-              child: const BlocSelectorWidget(),
+              body: const BlocSelectorWidget(),
+              footerBuilder: () {
+                return FutureBuilder<String>(
+                  future: CodeReader.getDartCode(
+                    r'lib\widget\1-bloc_selector\code_show.dart',
+                  ),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return getShowCode(
+                        code: snapshot.data ?? '',
+                      );
+                    }
+                    return const CircularProgressIndicator();
+                  },
+                );
+              },
             ),
           ],
         ),
@@ -91,11 +146,41 @@ class _DynamicTabExampleState extends State<DynamicTabExample> {
           children: [
             CardWidget(
               title: 'BlocProvider 示例',
-              child: const bloc_provider.BlocProviderWidget(),
+              body: const bloc_provider.BlocProviderWidget(),
+              footerBuilder: () {
+                return FutureBuilder<String>(
+                  future: CodeReader.getDartCode(
+                    r'lib\widget\2-bloc_provider\code_show.dart',
+                  ),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return getShowCode(
+                        code: snapshot.data ?? '',
+                      );
+                    }
+                    return const CircularProgressIndicator();
+                  },
+                );
+              },
             ),
             CardWidget(
               title: 'BlocProvider.value 示例',
-              child: const bloc_provider2.BlocProviderWidget(),
+              body: const bloc_provider2.BlocProviderWidget(),
+              footerBuilder: () {
+                return FutureBuilder<String>(
+                  future: CodeReader.getDartCode(
+                    r'lib\widget\2-bloc_provider\code_show.dart',
+                  ),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return getShowCode(
+                        code: snapshot.data ?? '',
+                      );
+                    }
+                    return const CircularProgressIndicator();
+                  },
+                );
+              },
             ),
           ],
         ),
@@ -110,7 +195,22 @@ class _DynamicTabExampleState extends State<DynamicTabExample> {
           children: [
             CardWidget(
               title: 'MultiBlocProvider 示例',
-              child: const MultiBlocProviderWidget(),
+              body: const MultiBlocProviderWidget(),
+              footerBuilder: () {
+                return FutureBuilder<String>(
+                  future: CodeReader.getDartCode(
+                    r'lib\widget\3-multi_bloc_provider\code_show.dart',
+                  ),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return getShowCode(
+                        code: snapshot.data ?? '',
+                      );
+                    }
+                    return const CircularProgressIndicator();
+                  },
+                );
+              },
             ),
           ],
         ),
@@ -125,7 +225,22 @@ class _DynamicTabExampleState extends State<DynamicTabExample> {
           children: [
             CardWidget(
               title: 'BlocListener 示例',
-              child: const BlocListenerWidget(),
+              body: const BlocListenerWidget(),
+              footerBuilder: () {
+                return FutureBuilder<String>(
+                  future: CodeReader.getDartCode(
+                    r'lib\widget\4-bloc_listener\code_show.dart',
+                  ),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return getShowCode(
+                        code: snapshot.data ?? '',
+                      );
+                    }
+                    return const CircularProgressIndicator();
+                  },
+                );
+              },
             ),
           ],
         ),
@@ -140,7 +255,22 @@ class _DynamicTabExampleState extends State<DynamicTabExample> {
           children: [
             CardWidget(
               title: 'MultiBlocListener 示例',
-              child: const MultiBlocListenerWidget(),
+              body: const MultiBlocListenerWidget(),
+              footerBuilder: () {
+                return FutureBuilder<String>(
+                  future: CodeReader.getDartCode(
+                    r'lib\widget\5-multi_bloc_listener\code_show.dart',
+                  ),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return getShowCode(
+                        code: snapshot.data ?? '',
+                      );
+                    }
+                    return const CircularProgressIndicator();
+                  },
+                );
+              },
             ),
           ],
         ),
@@ -155,7 +285,22 @@ class _DynamicTabExampleState extends State<DynamicTabExample> {
           children: [
             CardWidget(
               title: 'BlocConsumer 示例',
-              child: const BlocConsumerWidget(),
+              body: const BlocConsumerWidget(),
+              footerBuilder: () {
+                return FutureBuilder<String>(
+                  future: CodeReader.getDartCode(
+                    r'lib\widget\6-bloc_consumer\code_show.dart',
+                  ),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return getShowCode(
+                        code: snapshot.data ?? '',
+                      );
+                    }
+                    return const CircularProgressIndicator();
+                  },
+                );
+              },
             ),
           ],
         ),
@@ -170,11 +315,41 @@ class _DynamicTabExampleState extends State<DynamicTabExample> {
           children: [
             CardWidget(
               title: 'RepositoryProvider 示例',
-              child: const repository_provider.RepositoryProviderWidget(),
+              body: const repository_provider.RepositoryProviderWidget(),
+              footerBuilder: () {
+                return FutureBuilder<String>(
+                  future: CodeReader.getDartCode(
+                    r'lib\widget\7-repository_provider\code_show.dart',
+                  ),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return getShowCode(
+                        code: snapshot.data ?? '',
+                      );
+                    }
+                    return const CircularProgressIndicator();
+                  },
+                );
+              },
             ),
             CardWidget(
               title: 'RepositoryProvider.value 示例',
-              child: const repository_provider2.RepositoryProviderWidget(),
+              body: const repository_provider2.RepositoryProviderWidget(),
+              footerBuilder: () {
+                return FutureBuilder<String>(
+                  future: CodeReader.getDartCode(
+                    r'lib\widget\7-repository_provider\code_show.dart',
+                  ),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return getShowCode(
+                        code: snapshot.data ?? '',
+                      );
+                    }
+                    return const CircularProgressIndicator();
+                  },
+                );
+              },
             ),
           ],
         ),
@@ -189,7 +364,22 @@ class _DynamicTabExampleState extends State<DynamicTabExample> {
           children: [
             CardWidget(
               title: 'MultiRepositoryProvider 示例',
-              child: const MultiRepositoryProviderWidget(),
+              body: const MultiRepositoryProviderWidget(),
+              footerBuilder: () {
+                return FutureBuilder<String>(
+                  future: CodeReader.getDartCode(
+                    r'lib\widget\8-multi_repository_provider\code_show.dart',
+                  ),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return getShowCode(
+                        code: snapshot.data ?? '',
+                      );
+                    }
+                    return const CircularProgressIndicator();
+                  },
+                );
+              },
             ),
           ],
         ),
@@ -204,7 +394,22 @@ class _DynamicTabExampleState extends State<DynamicTabExample> {
           children: [
             CardWidget(
               title: 'context.read 示例',
-              child: const ContextReadWidget(),
+              body: const ContextReadWidget(),
+              footerBuilder: () {
+                return FutureBuilder<String>(
+                  future: CodeReader.getDartCode(
+                    r'lib\widget\9-context_read\code_show.dart',
+                  ),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return getShowCode(
+                        code: snapshot.data ?? '',
+                      );
+                    }
+                    return const CircularProgressIndicator();
+                  },
+                );
+              },
             ),
           ],
         ),
@@ -219,7 +424,22 @@ class _DynamicTabExampleState extends State<DynamicTabExample> {
           children: [
             CardWidget(
               title: 'context.select 示例',
-              child: const ContextSelectWidget(),
+              body: const ContextSelectWidget(),
+              footerBuilder: () {
+                return FutureBuilder<String>(
+                  future: CodeReader.getDartCode(
+                    r'lib\widget\9-context_select\code_show.dart',
+                  ),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return getShowCode(
+                        code: snapshot.data ?? '',
+                      );
+                    }
+                    return const CircularProgressIndicator();
+                  },
+                );
+              },
             ),
           ],
         ),
@@ -234,7 +454,22 @@ class _DynamicTabExampleState extends State<DynamicTabExample> {
           children: [
             CardWidget(
               title: 'context.watch 示例',
-              child: const ContextWatchWidget(),
+              body: const ContextWatchWidget(),
+              footerBuilder: () {
+                return FutureBuilder<String>(
+                  future: CodeReader.getDartCode(
+                    r'lib\widget\9-context_watch\code_show.dart',
+                  ),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return getShowCode(
+                        code: snapshot.data ?? '',
+                      );
+                    }
+                    return const CircularProgressIndicator();
+                  },
+                );
+              },
             ),
           ],
         ),
@@ -264,49 +499,6 @@ class _DynamicTabExampleState extends State<DynamicTabExample> {
               showNextIcon: true,
             ),
           ),
-        ],
-      ),
-    );
-  }
-}
-
-class CardWidget extends StatelessWidget {
-  String title;
-  Widget child;
-
-  CardWidget({
-    super.key,
-    required this.title,
-    required this.child,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(width: 1),
-        borderRadius: BorderRadius.all(Radius.circular(10)),
-      ),
-      margin: const EdgeInsets.all(10),
-      padding: EdgeInsets.all(10),
-      child: Column(
-        spacing: 10,
-        children: [
-          Container(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              title,
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          Divider(
-            height: 1,
-            color: Colors.grey,
-          ),
-          child,
         ],
       ),
     );

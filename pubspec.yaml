@@ -1,6 +1,6 @@
 name: base
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: "none"
 version: 1.0.0+1
 
 environment:
@@ -15,9 +15,11 @@ dependencies:
     sdk: flutter
 
   flutter_bloc: ^9.0.0
+  google_fonts: ^6.2.1 # 字体库 https://pub.dev/packages/google_fonts
   logger: ^2.5.0 # 日志库 https://pub.dev/packages/logger
   rxdart: ^0.28.0 # 扩展了 Dart Streams和 StreamControllers的功能  https://pub.dev/packages/rxdart
   stream_transform: ^2.1.1 # 添加常见变换运算符的扩展方法Stream https://pub.dev/packages/stream_transform
+  syntax_highlight: ^0.4.0 # 代码高亮 https://pub.dev/packages/syntax_highlight
 
 dev_dependencies:
   flutter_lints: ^5.0.0
@@ -26,3 +28,17 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - lib/widget/
+    - lib/widget/0-bloc_builder/
+    - lib/widget/1-bloc_selector/
+    - lib/widget/2-bloc_provider/
+    - lib/widget/3-multi_bloc_provider/
+    - lib/widget/4-bloc_listener/
+    - lib/widget/5-multi_bloc_listener/
+    - lib/widget/6-bloc_consumer/
+    - lib/widget/7-repository_provider/
+    - lib/widget/8-multi_repository_provider/
+    - lib/widget/9-context_read/
+    - lib/widget/9-context_select/
+    - lib/widget/9-context_watch/
