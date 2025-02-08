@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:syntax_highlight/syntax_highlight.dart';
 
@@ -39,15 +40,34 @@ Widget getShowCode({
       break;
   }
 
-  return Container(
-    padding: const EdgeInsets.all(16),
-    color: isDarkMode ? Colors.black : Colors.white,
-    child: Text.rich(
-      _code,
-      style: GoogleFonts.jetBrainsMono(
-        fontSize: 14,
-        height: 1.3,
-      ),
-    ),
-  );
+  return code.trim().isEmpty
+      ? Container()
+      : Stack(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(16),
+              color: isDarkMode ? Colors.black : Colors.white,
+              child: Text.rich(
+                _code,
+                style: GoogleFonts.jetBrainsMono(
+                  fontSize: 14,
+                  height: 1.3,
+                ),
+              ),
+            ),
+            Positioned(
+              top: 8,
+              right: 8,
+              child: IconButton(
+                icon: Icon(
+                  Icons.copy,
+                  color: isDarkMode ? Colors.white : Colors.black,
+                ),
+                onPressed: () {
+                  Clipboard.setData(ClipboardData(text: code));
+                },
+              ),
+            ),
+          ],
+        );
 }

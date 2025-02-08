@@ -67,22 +67,10 @@ class _DynamicTabExampleState extends State<DynamicTabExample> {
           children: [
             CardWidget(
               title: '省略 bloc 参数',
-              footerBuilder: () {
-                return FutureBuilder<String>(
-                  future: CodeReader.getDartCode(
-                    r'lib\widget\0-bloc_builder\code_show.dart',
-                  ),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return getShowCode(
-                        code: snapshot.data ?? '',
-                      );
-                    }
-                    return const CircularProgressIndicator();
-                  },
-                );
-              },
               body: bloc_builder.BlocBuilderWidget(),
+              footerBuilder: () {
+                return Container();
+              },
             ),
             CardWidget(
               title: '添加 bloc 参数',
