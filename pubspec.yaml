@@ -19,7 +19,9 @@ dependencies:
   logger: ^2.5.0 # 日志库 https://pub.dev/packages/logger
   rxdart: ^0.28.0 # 扩展了 Dart Streams和 StreamControllers的功能  https://pub.dev/packages/rxdart
   stream_transform: ^2.1.1 # 添加常见变换运算符的扩展方法Stream https://pub.dev/packages/stream_transform
-  syntax_highlight: ^0.4.0 # 代码高亮 https://pub.dev/packages/syntax_highlight
+  # syntax_highlight: ^0.4.0 # 代码高亮 https://pub.dev/packages/syntax_highlight
+  syntax_highlight:
+     path: modules/syntax_highlight
 
 dev_dependencies:
   flutter_lints: ^5.0.0
